@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-3 col-6">
+        <img src="{{pet.image_url}}" 
+        alt="{{pet.name}} profile pic" 
+        class="img-fluid">
+    </div>
+    <div class="col-sm-9 col-12">
+        <h1>{{pet.name}}</h1>
+        <ul>
+            <li>species: {{pet.species}}</li>
+            <li>age: {{pet.age}}</li>
+            <li>About Me: {{pet.note}}</li>
+            <li>Available: {{pet.available}}</li>
+        </ul>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-sm-6 ">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+    
+            {% for field in form if field.widget.input_type != 'hidden' %}
+            <div class="form_group">
+                {{field.label}}
+                {{field(class_='form-control')}}
+                {% for err in field.errors %}
+                <small class="form-text text-danger">
+                    {{err}}
+                </small>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button class="btn btn-success btn-lg">Update</button>   
+        </form>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+
+
+
+
+<!-- <form>
+    <button class="btn btn-primary btn-sm"
+            formaction="/pet/{{pet.id}}/edit"
+            formmethod="GET">Edit
+    </button>
+    <button class="btn btn-danger btn-sm"
+            formaction="/pet/{{pet.id}}/delete"
+            formmethod="POST">Delete
+    </button>
+</form> -->
